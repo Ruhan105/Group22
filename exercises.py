@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 # Excersise 9.2.1/2
 a = 1.5
 b = 1.0
@@ -25,7 +29,7 @@ def actualSolution(a, b, X0, n):
 
 # Compute Euler Approximation
 
-dt = 2**-4
+dt = 2**-6
 N = int(1/dt)
 
 points, W_fine = actualSolution(a, b, X0, fine_resolution)
