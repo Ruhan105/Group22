@@ -6,6 +6,13 @@ import matplotlib.pyplot as plt
 
 
 class FractionalBrownian:
+    """
+        class for generating fBm sample paths.
+
+        params:
+            N - sample path resolution
+            H - Hurst parameter
+    """
     def __init__(self, N=2**10, H=1/2):
         self.N = N
         self.H = H
