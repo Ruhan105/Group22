@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 
 dt = 2**-8
 N = int(1/dt)
-k = 2
-theta = 0.01
-p = 0
-sigma = 0.1
-r = 0 
-K = 100
+k = 2 # mean reversion
+theta = 0.01 # long run variance
+p = 0 # correlation between weiner process
+sigma = 0.1 # volatility of volatility
+r = 0 #interest rate
+K = 100 # strike price
 
 fig, ax = plt.subplots()
 
@@ -42,9 +42,9 @@ for _ in range(5):
     t = np.linspace(0, 1, N)
 
 
-    plt.plot(t, S_approx, label="Stock Price over time")
+    plt.plot(t, v_approx, label="Volatility over time")
     plt.xlabel("Time")
-    plt.ylabel("Stock Price (Euros)")
+    plt.ylabel("")
     plt.title("Heston Model")
 
 
@@ -81,5 +81,6 @@ plt.show()
 
 #TODO- look at Runge Kutta scheme and Milstein model + compare?
 #TODO- Analyse the effectiveness of the Chen model to model real world interest rates?
-## apply MLE to estimate parameters
-# look at merton jump diffusion model 
+## apply MLE to estimate parameters 
+# look at merton jump diffusion model
+# fractional brownian motion (s,t) |-> 1/2( abs(s)^2H + abs(t)^2H + abs(t-s))
