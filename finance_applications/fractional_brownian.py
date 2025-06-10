@@ -31,7 +31,7 @@ class FractionalBrownian:
 
         samples = np.random.multivariate_normal(mean=[0 for i in range(self.N)], cov=self.covariance)
 
-        return np.cumsum(samples)*(self.__dt)
+        return np.cumsum(samples*(self.__dt ** self.H))
 
     def plot_samples(self, n, t0, tn):
        
@@ -42,13 +42,10 @@ class FractionalBrownian:
         for _ in range(n):
             samples = self.generate_sample()
 
-            plt.plot(t, samples, label="Fractional Brownian motion")
+            plt.plot(t, samples)
         
 
         plt.xlabel("Time")
+        plt.title("Fractional Brownian motion")
 
         plt.show()
-
-f = FractionalBrownian(H=0.2)
-
-f.plot_samples(5, 0, 1)

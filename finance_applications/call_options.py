@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 
 dt = 2**-8
 N = int(1/dt)
-k = 2 # mean reversion
-theta = 0.01 # long run variance
-p = 0 # correlation between weiner process
-sigma = 0.1 # volatility of volatility
-r = 0 #interest rate
-K = 100 # strike price
+k = 2
+theta = 0.01
+p = 0
+sigma = 0.1
+r = 0
+K = 100
 
 fig, ax = plt.subplots()
 
@@ -33,8 +33,8 @@ for _ in range(5):
 
         # Using default values as defined in the paper
 
-        Sn = Sn + np.sqrt(vn * Sn)*i[0]   # set drift coefficient to 0 for testing purposes
-        vn = vn + k*(theta - vn)*dt + sigma*np.sqrt(vn)*i[1]
+        Sn = Sn + np.sqrt(max(vn, 0))*Sn*i[0]   # set drift coefficient to 0 for testing purposes
+        vn = vn + k*(theta - vn)*dt + sigma*np.sqrt(max(vn, 0))*i[1]
 
         S_approx.append(Sn)
         v_approx.append(vn)
@@ -42,9 +42,9 @@ for _ in range(5):
     t = np.linspace(0, 1, N)
 
 
-    plt.plot(t, v_approx, label="Volatility over time")
+    plt.plot(t, S_approx, label="Options Price over time")
     plt.xlabel("Time")
-    plt.ylabel("")
+    plt.ylabel("Stock Price (Euros)")
     plt.title("Heston Model")
 
 
@@ -72,7 +72,7 @@ for _ in range(5):
     t = np.linspace(0, 1, N)
 
 
-    plt.plot(t, S_approx, label="Stock Price over time")
+    plt.plot(t, S_approx, label="Options Price over time")
     plt.xlabel("Time")
     plt.ylabel("Stock Price")
     plt.title("GARCH diffusion model")
@@ -81,6 +81,5 @@ plt.show()
 
 #TODO- look at Runge Kutta scheme and Milstein model + compare?
 #TODO- Analyse the effectiveness of the Chen model to model real world interest rates?
-## apply MLE to estimate parameters 
+## apply MLE to estimate parameters
 # look at merton jump diffusion model
-# fractional brownian motion (s,t) |-> 1/2( abs(s)^2H + abs(t)^2H + abs(t-s))
